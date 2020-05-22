@@ -63,11 +63,25 @@ namespace TicksFunction
             // Ensure the name
             name = name ?? data?.name ?? $"Name-{Guid.NewGuid().ToString()}";
 
-            // Save to DB
-            var id = await Save(name);
+            // Log the message
+            log.LogInformation($"The name to be saved is '{name}'.");
+            log.LogInformation("Saving to database, please wait...");
 
-            // Return the result
-            return (ActionResult)new OkObjectResult($"New tick record has been saved with id = {id}.");
+            // Save to DB
+            try
+            {
+                var id = await Save(name);
+
+                // Log the message
+                var message = $"New tick record has been saved with id = {id}.";
+                log.LogInformation(message);
+                return (ActionResult)new OkObjectResult(message);
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Error: {ex.Message}");
+                return (ActionResult)new BadRequestObjectResult(ex.Message);
+            }
         }
     }
 }
