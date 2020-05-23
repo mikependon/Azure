@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading.Tasks;
 using TicksPublisher.Interfaces;
 
 namespace TicksPublisher.Publishers
@@ -31,6 +32,15 @@ namespace TicksPublisher.Publishers
             var encoded = Encoding.UTF8.GetBytes(serialized);
             queueClient.SendAsync(new Message(encoded));
             queueClient.CloseAsync();
+        }
+
+        public async Task PublishAsync(T message)
+        {
+            var queueClient = new QueueClient(ConnectionString, EntityPath);
+            var serialized = JsonConvert.SerializeObject(message);
+            var encoded = Encoding.UTF8.GetBytes(serialized);
+            await queueClient.SendAsync(new Message(encoded));
+            await queueClient.CloseAsync();
         }
 
         #endregion
