@@ -60,27 +60,31 @@ namespace TicksFunction
 
             using (var repository = new DatabaseRepository())
             {
-                var measurements = repository.QueryAll<Measurement>(cacheKey: "Measurements");
-                var measurement = GetAny(measurements);
-                var ticks = GenerateTicks(measurement);
-                var context = new
-                {
-                    measurement.Name,
-                    ticks.Value,
-                    ticks.CreatedDateUtc
-                };
-                log.LogInformation($"Ticks generated: '{context}'.");
                 try
                 {
+                    var measurements = repository.QueryAll<Measurement>(cacheKey: "Measurements");
+                    var measurement = GetAny(measurements);
+                    var ticks = GenerateTicks(measurement);
+                    var context = new
+                    {
+                        measurement.Name,
+                        ticks.Value,
+                        ticks.CreatedDateUtc
+                    };
+
+                    log.LogInformation($"Ticks generated: '{context}'.");
+
                     var id = await repository.InsertAsync(ticks);
+
                     var message = $"Tick record '{context}' has been saved with ID = '{id}'.";
                     log.LogInformation(message);
-                    return (ActionResult)new OkObjectResult(message);
+
+                    return new OkObjectResult(message);
                 }
                 catch (Exception ex)
                 {
                     log.LogError($"Error: {ex.Message}");
-                    return (ActionResult)new BadRequestObjectResult(ex.Message);
+                    return new BadRequestObjectResult(ex.Message);
                 }
             }
         }
