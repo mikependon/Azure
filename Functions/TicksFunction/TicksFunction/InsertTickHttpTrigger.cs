@@ -28,7 +28,7 @@ namespace TicksFunction
             return elements.ElementAt(index);
         }
 
-        private static Tick GenerateTicks(Measurement measurement)
+        private static Tick CreateTickFromMeasurement(Measurement measurement)
         {
             return new Tick
             {
@@ -64,17 +64,17 @@ namespace TicksFunction
                 {
                     var measurements = repository.QueryAll<Measurement>(cacheKey: "Measurements");
                     var measurement = GetAny(measurements);
-                    var ticks = GenerateTicks(measurement);
+                    var tick = CreateTickFromMeasurement(measurement);
                     var context = new
                     {
                         measurement.Name,
-                        ticks.Value,
-                        ticks.CreatedDateUtc
+                        tick.Value,
+                        tick.CreatedDateUtc
                     };
 
                     log.LogInformation($"Ticks generated: '{context}'.");
 
-                    var id = await repository.InsertAsync(ticks);
+                    var id = await repository.InsertAsync(tick);
 
                     var message = $"Tick record '{context}' has been saved with ID = '{id}'.";
                     log.LogInformation(message);
