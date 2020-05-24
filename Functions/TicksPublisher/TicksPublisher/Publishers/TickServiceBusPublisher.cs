@@ -1,4 +1,4 @@
-﻿using TicksPublisher.Models;
+﻿using TicksPublisher.DTOs;
 
 namespace TicksPublisher.Publishers
 {

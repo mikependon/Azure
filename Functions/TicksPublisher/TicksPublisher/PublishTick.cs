@@ -44,10 +44,9 @@ namespace TicksPublisher
                 var tick = await m_manager.PublishRandomAsync();
                 var context = new
                 {
-                    tick.Id,
-                    tick.MeasurementId,
+                    tick.Measurement,
                     tick.Value,
-                    tick.CreatedDateUtc
+                    tick.PublishedDateUtc
                 };
                 return new OkObjectResult($"Published: {context}");
             }

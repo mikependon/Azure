@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using TicksPublisher.DTOs;
 using TicksPublisher.Extensions;
 using TicksPublisher.Models;
 using TicksPublisher.Publishers;
@@ -40,7 +41,7 @@ namespace TicksPublisher.Managers
             {
                 var measurements = await m_repository.QueryAllAsync<Measurement>(cacheKey: "Measurements");
                 var tick = CreateFromMeasurement(measurements.GetAny());
-                await m_repository.InsertAsync(tick);
+                await m_publisher.PublishAsync(tick);
                 return tick;
             }
             catch
@@ -57,9 +58,9 @@ namespace TicksPublisher.Managers
         {
             return new Tick
             {
-                MeasurementId = measurement.Id,
+                Measurement = measurement.Name,
                 Value = m_randomizer.Next(0, measurement.MaxValue),
-                CreatedDateUtc = DateTime.UtcNow
+                PublishedDateUtc = DateTime.UtcNow
             };
         }
 
