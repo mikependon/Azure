@@ -12,7 +12,7 @@ namespace TicksPublisher.Managers
         #region Privates
 
         private static Random m_randomizer = new Random();
-        private static DatabaseRepository m_repository = new DatabaseRepository();
+        private static DefinitionRepository m_repository = new DefinitionRepository();
         private static TickServiceBusPublisher m_publisher = new TickServiceBusPublisher();
 
         #endregion
@@ -26,7 +26,6 @@ namespace TicksPublisher.Managers
                 var measurements = m_repository.QueryAll<Measurement>(cacheKey: "Measurements");
                 var tick = CreateFromMeasurement(measurements.GetAny());
                 m_repository.Insert(tick);
-                m_publisher.Publish(tick);
                 return tick;
             }
             catch
@@ -42,7 +41,6 @@ namespace TicksPublisher.Managers
                 var measurements = await m_repository.QueryAllAsync<Measurement>(cacheKey: "Measurements");
                 var tick = CreateFromMeasurement(measurements.GetAny());
                 await m_repository.InsertAsync(tick);
-                await m_publisher.PublishAsync(tick);
                 return tick;
             }
             catch
