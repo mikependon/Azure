@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
-using TicksPublisher.Interfaces;
+using TicksReceiver.Interfaces;
 
-namespace TicksPublisher.Publishers
+namespace TicksReceiver.Publishers
 {
     public abstract class BaseServiceBusPublisher<T> : IPublisher<T> where T : class
     {

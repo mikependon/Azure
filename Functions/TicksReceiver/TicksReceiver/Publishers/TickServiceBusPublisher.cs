@@ -1,6 +1,6 @@
-﻿using TicksPublisher.DTOs;
+﻿using TicksReceiver.Models;
 
-namespace TicksPublisher.Publishers
+namespace TicksReceiver.Publishers
 {
     public class TickServiceBusPublisher : BaseServiceBusPublisher<Tick>
     {

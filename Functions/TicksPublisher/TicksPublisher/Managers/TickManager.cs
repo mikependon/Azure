@@ -14,7 +14,7 @@ namespace TicksPublisher.Managers
 
         private static Random m_randomizer = new Random();
         private static DefinitionRepository m_repository = new DefinitionRepository();
-        private static TickServiceBusPublisher m_publisher = new TickServiceBusPublisher();
+        private static TicksQueuePublisher m_publisher = new TicksQueuePublisher();
 
         #endregion
 
