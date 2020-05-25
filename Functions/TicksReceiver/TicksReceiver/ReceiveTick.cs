@@ -1,6 +1,4 @@
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -36,9 +34,6 @@ namespace TicksReceiver
         public static async void Run(
             [ServiceBusTrigger("ticksqueue", Connection = "TicksServiceBus")]
             string message,
-            Int32 deliveryCount,
-            DateTime enqueuedTimeUtc,
-            string messageId,
             ILogger log)
         {
             log.LogInformation($"C# HTTP trigger function named '{typeof(ReceiveTick).Name}' processed a request. Message: {message}");
