@@ -1,0 +1,10 @@
+﻿{
+  "ConnectionStrings": {
+    "TicksServiceBus": "Endpoint=sb://ticksservicebusnamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=UzPz5w6wVOzG1AIe31jafmzbOfhCrbdQEFV3t7JHlsw="
+  },
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=ticksfunctionstorage;AccountKey=VsZjstlb0syHoe1KvAznUsmJdmz9aAoqEiln339RRNhbJfO76YZTqS1kcvNlHkj34IZ8rpLqBr9ZBm4ocQs3FA==;BlobEndpoint=https://ticksfunctionstorage.blob.core.windows.net/;TableEndpoint=https://ticksfunctionstorage.table.core.windows.net/;QueueEndpoint=https://ticksfunctionstorage.queue.core.windows.net/;FileEndpoint=https://ticksfunctionstorage.file.core.windows.net/",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  }
+}
