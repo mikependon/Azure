@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace TicksReceiver.DTOs
+namespace TicksPublisher.DTOs
 {
-    public class Tick
+    public class TickDTO
     {
         public string Measurement { get; set; }
         public int Value { get; set; }

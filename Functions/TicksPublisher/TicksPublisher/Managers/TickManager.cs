@@ -20,7 +20,7 @@ namespace TicksPublisher.Managers
 
         #region Methods
 
-        public Tick PublishRandom()
+        public TickDTO PublishRandom()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace TicksPublisher.Managers
             }
         }
 
-        public async Task<Tick> PublishRandomAsync()
+        public async Task<TickDTO> PublishRandomAsync()
         {
             try
             {
@@ -54,9 +54,9 @@ namespace TicksPublisher.Managers
 
         #region Helpers
 
-        private static Tick CreateFromMeasurement(Measurement measurement)
+        private static TickDTO CreateFromMeasurement(Measurement measurement)
         {
-            return new Tick
+            return new TickDTO
             {
                 Measurement = measurement.Name,
                 Value = m_randomizer.Next(0, measurement.MaxValue),
