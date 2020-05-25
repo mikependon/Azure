@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using RepoDb;
 using TicksPublisher.Managers;
+using Newtonsoft.Json;
 
 namespace TicksPublisher
 {
@@ -48,7 +49,8 @@ namespace TicksPublisher
                     tick.Value,
                     tick.PublishedDateUtc
                 };
-                return new OkObjectResult($"Published: {context}");
+                log.LogInformation($"Published: {context}");
+                return new JsonResult(JsonConvert.SerializeObject(tick));
             }
             catch (Exception ex)
             {
